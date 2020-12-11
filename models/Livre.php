@@ -17,19 +17,21 @@ class Livre {
     function saveBook() {
 
         //echo "Je récupère le contenu de mon fichier livres.json :<br>";
-        $contenu = file_get_contents("datas/livres.json");
+        $contenu = (file_exists("datas/livres.json"))? file_get_contents("datas/livres.json") : "";
         //var_dump($contenu);
 
         //echo "Je décode mon JSON en structure PHP (tableau associatif) :<br>";
         $livres = json_decode($contenu);
         //var_dump($livres);
+   
+        $livres = (is_array($livres))? $livres : [];
 
         //echo "Je crée un tableau avec mon objet courant : <br>";
         $livre = get_object_vars($this);
         //var_dump($livre);
 
         //echo "J'ajoute ce livre à mon tableau de livres (\$livres)";
-        array_push($livres, get_object_vars($this));
+        array_push($livres, $livre);
         //var_dump($livres);
 
         //echo "J'ouvre mon fichier livres.json <br>";
@@ -48,12 +50,14 @@ class Livre {
     static function getLivres(): array {
 
         //echo "Je récupère le contenu de mon fichier livres.json :<br>";
-        $contenu = file_get_contents("datas/livres.json");
+        $contenu = (file_exists("datas/livres.json"))? file_get_contents("datas/livres.json") : "";
         //var_dump($contenu);
 
         //echo "Je décode mon JSON en structure PHP (tableau associatif) :<br>";
         $livres = json_decode($contenu);
         //var_dump($livres);
+
+        $livres = (is_array($livres))? $livres : [];
 
         return $livres;
     }
