@@ -2,6 +2,12 @@
 
 $route = (isset($_GET["route"]))? $_GET["route"] : "accueil";
 
+// Liste des routes (fonctionnalités) :
+// index.php?route=accueil (ou rien) : Affichage page d'accueil
+// index.php?route=autrepage : Affichage d'une autre page pour l'exemple
+// index.php?route=formlivre : Affichage du formulaire pour ajouter un livre
+// index.php?route=ajoutlivre : Fonctionnalité redirigée permettant l'ajout effectif du livre
+
 // TRADUCTION :
 // if(isset($_GET["route"])) {
 //     $route = $_GET["route"];
@@ -20,7 +26,7 @@ switch($route) {
     break;
     case "ajoutlivre" : ajoutLivre();
     break;
-    default : $toTemplate = "404.html";
+    default : $toTemplate = ["template" => "404.html"];
 
 }
 
@@ -99,6 +105,14 @@ function ajoutLivre() {
     <title>Document</title>
 </head>
 <body>
+
+    <nav>
+        <ul>
+            <li><a href="index.php?route=accueil">Accueil</a></li>
+            <li><a href="index.php?route=autrepage">Autre page</a></li>
+            <li><a href="index.php?route=formlivre">Formulaire d'ajout d'un livre</a></li>
+        </ul>
+    </nav>
     
     <?php require "templates/" . $toTemplate['template']; ?>
 
