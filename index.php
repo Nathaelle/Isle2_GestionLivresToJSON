@@ -69,7 +69,14 @@ function showAutrePage(): array {
  */
 function showFormLivre(): array {
 
-    return ["template" => "formulaire.php"];
+    require_once "models/Livre.php";
+
+    $livres = Livre::getLivres();
+
+    //echo "Données récupérées via getLivres() : <br>";
+    //var_dump($livres);
+
+    return ["template" => "formulaire.php", "datas" => $livres];
 }
 
 /**
